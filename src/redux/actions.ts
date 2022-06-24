@@ -12,12 +12,12 @@ export const ChangeCurrencyFieldAC = (amountOfBYN: string, amountOfCurrency: str
 
 export type ChangeAction = ReturnType<typeof ChangeActionAC>;
 export const ChangeActionAC = (isBuying: boolean) => {
-  return {type: ACTIONS_TYPE.CHANGE_CHANGE_ACTION, isBuying}
+  return {type: ACTIONS_TYPE.CHANGE_CHANGE_ACTION, isBuying}as const
 };
 
 export type ChangeCurrentCurrencyType = ReturnType<typeof ChangeCurrentCurrencyAC>;
 export const ChangeCurrentCurrencyAC = (currentCurrency: string) => {
-  return {type: ACTIONS_TYPE.CHANGE_CURRENT_CURRENCY, currentCurrency}
+  return {type: ACTIONS_TYPE.CHANGE_CURRENT_CURRENCY, currentCurrency}as const
 };
 
 export type CurrencyReducersTypes = ChangeCurrencyFieldType | ChangeAction | ChangeCurrentCurrencyType;
