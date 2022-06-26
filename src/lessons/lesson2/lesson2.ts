@@ -75,6 +75,16 @@ function makeCounter2(n:number){
 
 // P.S. типизируйте только аргументы, а при вызове функции используйте @ts-ignore
 
+function superSum(args: number, argsToString = '0',size=args) {
+  if (args === 0) {
+    return argsToString.split('' || ',').reduce((acc, el, i) => i < size ? acc + Number(el) : acc, 0)
+  }
+  return (...n: any) => {
+    argsToString = argsToString + n + ','
+    return superSum(n.length > 1 && (args - n.length) >= 0 ? args - n.length : args - 1, argsToString, size)
+  }
+}
+
 // Task 05
 // решить все задачи по рекурсии которые даны в конце статьи https://learn.javascript.ru/recursion
 

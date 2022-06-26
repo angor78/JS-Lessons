@@ -1,5 +1,8 @@
 // Task 01
 // Реализовать функцию sum которая суммирует 2 числа следующим образом sum(3)(6) === 9
+
+import {isFunction} from "util";
+
 test('Task 01', () => {
   function sum(a: number) {
     return (b: number) => {
@@ -72,28 +75,36 @@ test('Task 03', () => {
 // 5) superSum(3)(2,5)(3) //10
 // 6) superSum(3)(2,5)(3,9) //10
 // P.S. типизируйте только аргументы, а при вызове функции используйте @ts-ignore
-// test('Task 04', () => {
-//   let sum = 0
-//   function superSum(args: number) {
-//     if (args === 0) {
-//       return sum
-//     } else {
-//       return () => {
-//
-//         return superSum(args - 1)
-//       }
-//     }
-//   }
-//
-//   //@ts-ignore
-//   expect(superSum(0)).toBe(0)
-//   //@ts-ignore
-//   expect(superSum(3)(2)(5)(3)).toBe(10)
-//   //@ts-ignore
-//   expect(superSum(3)(2)(5, 3)).toBe(10)
-//
-//
-// })
+
+
+test('Task 04', () => {
+
+    function superSum(args: number, argsToString = '0',size=args) {
+      if (args === 0) {
+        return argsToString.split('' || ',').reduce((acc, el, i) => i < size ? acc + Number(el) : acc, 0)
+      }
+      return (...n: any) => {
+        argsToString = argsToString + n + ','
+        return superSum(n.length > 1 && (args - n.length) >= 0 ? args - n.length : args - 1, argsToString, size)
+      }
+    }
+    //@ts-ignore
+    expect(superSum(0)).toBe(0)
+    //@ts-ignore
+    expect(superSum(3)(2)(5)(3)).toBe(10)
+    //@ts-ignore
+    expect(superSum(3)(2)(5, 3)).toBe(10)
+    //@ts-ignore
+    expect(superSum(3)(2, 5, 3)).toBe(10)
+    //@ts-ignore
+    expect(superSum(3)(2, 5)(3)).toBe(10)
+    //@ts-ignore
+    expect(superSum(3)(2, 5)(3, 9)).toBe(10)
+
+
+  }
+
+)
 // Task 05
 // решить все задачи по рекурсии которые даны в конце статьи https://learn.javascript.ru/recursion
 
@@ -101,5 +112,5 @@ test('Task 03', () => {
 // написать функцию, которая повторяет функционал метода flat массива на всю глубину.
 
 // just a plug
-export default () => {
-};
+  export default () => {
+  };
